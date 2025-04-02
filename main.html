@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Roblox Pants Designer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .form-field {
+      margin-bottom: 15px;
+    }
+    .form-field label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .form-field input {
+      width: 100%;
+      padding: 8px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .preview {
+      margin-top: 20px;
+      position: relative;
+      width: 400px;
+      height: 600px;
+      border: 1px solid #ccc;
+      background: url('man_model.png') center center no-repeat;
+      background-size: cover;
+    }
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Roblox Pants Designer</h1>
+    <div class="form-field">
+      <label for="pants-description">Pants Description:</label>
+      <input type="text" id="pants-description" placeholder="Enter your design description..." />
+    </div>
+    <button id="generate-btn">Generate Design</button>
+    <h2>Preview</h2>
+    <div class="preview">
+      <!-- This image element will display the generated design overlay -->
+      <img id="pants-overlay" class="overlay" src="" alt="Generated Pants" />
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('generate-btn').addEventListener('click', function() {
+      const description = document.getElementById('pants-description').value.trim();
+      if (!description) {
+        alert('Please enter a description for your design.');
+        return;
+      }
+      
+      // Simulate sending the description to an image generation API.
+      generateImage(description)
+        .then(imageUrl => {
+          const overlayImg = document.getElementById('pants-overlay');
+          overlayImg.src = imageUrl;
+          overlayImg.style.display = 'block';
+        })
+        .catch(error => {
+          console.error('Error generating image:', error);
+          alert('Failed to generate image. Please try again.');
+        });
+    });
+
+    // Dummy image generation function simulating an API call.
+    function generateImage(description) {
+      return new Promise((resolve, reject) => {
+        // In a real implementation, replace the following with an actual API call:
+        // fetch('YOUR_IMAGE_GENERATION_API_ENDPOINT', {
+        //   method: 'POST',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify({ prompt: description })
+        // })
+        // .then(response => response.json())
+        // .then(data => resolve(data.imageUrl))
+        // .catch(err => reject(err));
+
+        // For demo purposes, simulate a delay and return a placeholder image URL.
+        setTimeout(() => {
+          // Replace 'generated_pants_sample.png' with the URL of the image you get from your API.
+          resolve('generated_pants_sample.png');
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
+
